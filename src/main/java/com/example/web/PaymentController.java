@@ -1,6 +1,7 @@
 package com.example.web;
 
 import com.example.service.PaymentService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +21,8 @@ public class PaymentController {
     PaymentService service;
 
     @GetMapping(value = "/calculate", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Calculate vacation payment by days, or by dates of the vacation",
+            description = "Days should be a number. Dates must be in format 'YYYY-MM-DD'.")
     public double calculate(@RequestParam double salary,
                             @RequestParam @Nullable Integer days,
                             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Nullable LocalDate startDate,
